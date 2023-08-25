@@ -95,13 +95,13 @@ exports.checkVulnLines = () => async (req: Request<{}, {}, VerdictRequestBody>, 
     if (codingChallengeInfos?.hints) {
       if (accuracy.getFindItAttempts(key) > codingChallengeInfos.hints.length) {
         if (vulnLines.length === 1) {
-          hint = res.__('Line {{vulnLine}} is responsible for this vulnerability or security flaw. Select it and submit to proceed.', { vulnLine: vulnLines[0].toString() })
+          hint = escape(res.__('Line {{vulnLine}} is responsible for this vulnerability or security flaw. Select it and submit to proceed.', { vulnLine: vulnLines[0].toString() }))
         } else {
-          hint = res.__('Lines {{vulnLines}} are responsible for this vulnerability or security flaw. Select them and submit to proceed.', { vulnLines: vulnLines.toString() })
+          hint = escape(res.__('Lines {{vulnLines}} are responsible for this vulnerability or security flaw. Select them and submit to proceed.', { vulnLines: vulnLines.toString() }))
         }
       } else {
         const nextHint = codingChallengeInfos.hints[accuracy.getFindItAttempts(key) - 1] // -1 prevents after first attempt
-        if (nextHint) hint = res.__(nextHint)
+        if (nextHint) hint = escape(res.__(nextHint))
       }
     }
   }
