@@ -4,6 +4,7 @@ import * as accuracy from '../lib/accuracy'
 const challengeUtils = require('../lib/challengeUtils')
 const fs = require('fs')
 const yaml = require('js-yaml')
+const _ = require('lodash')
 
 const FixesDir = 'data/static/codefixes'
 
@@ -27,7 +28,8 @@ export const readFixes = (key: string) => {
   let correct: number = -1
   for (const file of files) {
     if (file.startsWith(`${key}_`)) {
-      const fix = fs.readFileSync(`${FixesDir}/${file}`).toString()
+      const fileEscaped = _.escape(file)
+      const fix = fs.readFileSync(`${FixesDir}/${fileEscaped}`).toString()
       const metadata = file.split('_')
       const number = metadata[1]
       fixes.push(fix)
