@@ -24,6 +24,7 @@ export class LastLoginIpComponent {
     } catch (err) {
       console.log(err)
     }
+    this.parseAuthToken();
   }
 
   parseAuthToken () {
@@ -31,7 +32,7 @@ export class LastLoginIpComponent {
     const token = localStorage.getItem('token')
     if (token) {
       payload = jwtDecode(token)
-      if (payload.data.lastLoginIp) {
+      if (typeof payload.data.lastLoginIp === 'string') {
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         this.lastLoginIp = this.sanitizer.bypassSecurityTrustHtml(`<small>${payload.data.lastLoginIp}</small>`)
       }
