@@ -28,7 +28,7 @@ import { WalletModelInit } from './wallet'
 
 const Sequelize = require('sequelize')
 
-const sequelize = new Sequelize('database', 'username', 'password', {
+const sequelize = new Sequelize('database', 'username', process.env.DB_PASSWORD, {
   dialect: 'sqlite',
   retry: {
     match: [/SQLITE_BUSY/],
