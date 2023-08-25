@@ -96,9 +96,9 @@ describe('/rest/products/reviews', () => {
           await editReview(reviewId)
         }
 
-        async function editReview (reviewId: string) {
+        async function editReview (reviewId) {
           const response = await fetch(
-            `${Cypress.env('baseUrl')}/rest/products/reviews`,
+            `${Cypress.env('baseUrl')}/rest/products/reviews?reviewId=${encodeURIComponent(reviewId)}`, /*n0*/
             {
               method: 'PATCH',
               headers: {
@@ -125,9 +125,9 @@ describe('/rest/products/reviews', () => {
     it('should be possible to like reviews multiple times', () => {
       cy.visit('/')
       cy.window().then(async () => {
-        async function sendPostRequest (reviewId: string) {
+        async function sendPostRequest (reviewId) {
           const anotherResponse = await fetch(
-            `${Cypress.env('baseUrl')}/rest/products/reviews`,
+            `${Cypress.env('baseUrl')}/rest/products/reviews?reviewId=${encodeURIComponent(reviewId)}`, /*n1*/
             {
               method: 'POST',
               headers: {
