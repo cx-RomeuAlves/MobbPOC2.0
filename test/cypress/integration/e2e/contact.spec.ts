@@ -146,7 +146,7 @@ describe('/#/contact', () => {
         )
         if (response.status === 200) {
           const responseJson = await response.json()
-          console.log(responseJson)
+          console.log(String(responseJson).replace(/\n|\r/g, ''))
 
           await sendPostRequest(responseJson)
         }
