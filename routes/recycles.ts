@@ -9,9 +9,13 @@ import { RecycleModel } from '../models/recycle'
 import * as utils from '../lib/utils'
 
 exports.getRecycleItem = () => (req: Request, res: Response) => {
+  const id = req.params.id
+  if (!/^[0-9]+$/.test(id)) {
+    return res.send('Invalid input')
+  }
   RecycleModel.findAll({
     where: {
-      id: JSON.parse(req.params.id)
+      id: JSON.parse(id)
     }
   }).then((Recycle) => {
     return res.send(utils.queryResultToJson(Recycle))
