@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2014-2023 Bjoern Kimminich & the OWASP Juice Shop contributors.
- * SPDX-License-Identifier: MIT
- */
-
 import { Component, EventEmitter, Input, OnInit, Output, NgZone } from '@angular/core'
 import { AddressService } from '../Services/address.service'
 import { MatTableDataSource } from '@angular/material/table'
@@ -69,7 +64,7 @@ export class AddressComponent implements OnInit {
   }
 
   chooseAddress () {
-    sessionStorage.setItem('addressId', this.addressId)
+    localStorage.setItem('addressId', this.addressId)
     this.ngZone.run(async () => await this.router.navigate(['/delivery-method']))
   }
 
