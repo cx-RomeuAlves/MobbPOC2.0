@@ -11,8 +11,7 @@ import * as jwtDecode from 'jwt-decode'
   selector: 'app-last-login-ip',
   templateUrl: './last-login-ip.component.html',
   styleUrls: ['./last-login-ip.component.scss']
-
-  })
+})
 
 export class LastLoginIpComponent {
   lastLoginIp: any = '?'
@@ -33,7 +32,7 @@ export class LastLoginIpComponent {
       payload = jwtDecode(token)
       if (payload.data.lastLoginIp) {
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        this.lastLoginIp = this.sanitizer.bypassSecurityTrustHtml(`<small>${payload.data.lastLoginIp}</small>`)
+        this.lastLoginIp = this.sanitizer.bypassSecurityTrustStyle(`font-size: 12px; color: black;`).toString() + this.sanitizer.sanitize(SecurityContext.HTML, `<small>${payload.data.lastLoginIp}</small>`)
       }
     }
   }
