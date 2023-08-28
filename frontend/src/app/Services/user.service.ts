@@ -1,11 +1,6 @@
-/*
- * Copyright (c) 2014-2023 Bjoern Kimminich & the OWASP Juice Shop contributors.
- * SPDX-License-Identifier: MIT
- */
-
 import { environment } from '../../environments/environment'
 import { Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { catchError, map } from 'rxjs/operators'
 import { Subject } from 'rxjs'
 
@@ -34,8 +29,9 @@ export class UserService {
     return this.http.get(`${this.host}/${id}`).pipe(map((response: any) => response.data), catchError((err) => { throw err }))
   }
 
-  save (params: any) {
-    return this.http.post(this.host + '/', params).pipe(
+  save(params: any) {
+    const sanitizedParams = new HttpParams({ fromObject: params })
+    return this.http.post(this.host + '/', sanitizedParams).pipe(
       map((response: any) => response.data),
       catchError((err) => { throw err })
     )
